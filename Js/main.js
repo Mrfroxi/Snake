@@ -23,7 +23,21 @@ snake[0] = {
     y: 10*box
 }
 
+//Движение
+let put ;
+function walks(event){
+    if(event.keyCode ==37 && put !='right'){
+        put = 'left' 
+    }else if(event.keyCode== 39   && put !='left'){
+        put = 'right'
+    }else if(event.keyCode == 38   && put != 'down'){
+        put = 'up'
+    }else if(event.keyCode==40 && put != 'up'){
+        put = 'down'
+    }
+    }
 
+//Появлементов элементов
 function draw() {
     ctx.drawImage(place,0 ,0);
     ctx.drawImage(foodImg,food.x,food.y);
@@ -31,30 +45,34 @@ function draw() {
         ctx.fillStyle = "green";
         ctx.fillRect(snake[i].x , snake[i].y , box , box)
     }
+    console.log(snake)
+        let snakeX = snake[0].x;
+        let snakeY = snake[0].y;
 
+        snake.pop();
 
+        if(put == 'left') snakeX -= box;
+        if(put == 'right') snakeX += box;
+        if(put == 'up') snakeY -= box;
+        if(put == 'down') snakeY += box;
+
+        snake.unshift()
 
 }
+
+//Работа с длиной
+// let snakeX = snake[0].x;
+// let snakeY = snake[0].y;
+
+// snake.pop();
+
+// if(put == 'left') snakeX -= box;
+// if(put == 'right') snakeX += box;
+// if(put == 'up') snakeY -= box;
+// if(put == 'down') snakeY += box;
+
+// snake.unshift()
+
 
 document.addEventListener('keydown' , walks);
-
-let put ;
-
-function walks(event){
-if(event.keyCode ==37 && put !='right'){
-    put = 'left' 
-}else if(event.keyCode== 39   && put !='left'){
-    put = 'right'
-}else if(event.keyCode == 38   && put != 'down'){
-    put = 'up'
-}else if(event.keyCode==40 && put != 'up'){
-    put = 'down'
-}
-}
-
-
-
-
-
-
 let game = setInterval(draw , 100);
