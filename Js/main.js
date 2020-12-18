@@ -8,7 +8,7 @@ const foodImg = new Image();
 foodImg.src = 'img/food.png' ;
 
 
-let schore = 0;
+let score = 0;
 
 let box =32;
 
@@ -45,33 +45,56 @@ function draw() {
         ctx.fillStyle = "green";
         ctx.fillRect(snake[i].x , snake[i].y , box , box)
     }
-    console.log(snake)
-        let snakeX = snake[0].x;
-        let snakeY = snake[0].y;
 
-        snake.pop();
-
-        if(put == 'left') snakeX -= box;
-        if(put == 'right') snakeX += box;
-        if(put == 'up') snakeY -= box;
-        if(put == 'down') snakeY += box;
-
-        snake.unshift()
-
+    
+function eatTail(head, arr) {
+	for(let i = 0; i < arr.length; i++) {
+		if(head.x == arr[i].x && head.y == arr[i].y)
+			clearInterval(game);
+	}
 }
+    //Счёт
+    
+	ctx.fillStyle = "white";
+	ctx.font = "50px Arial";
+    ctx.fillText(score,box*2,box*1.8);
 
-//Работа с длиной
-// let snakeX = snake[0].x;
-// let snakeY = snake[0].y;
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
 
-// snake.pop();
+    if(snakeX < box || snakeX > box * 17
+		|| snakeY < 3 * box || snakeY > box * 17)
+		clearInterval(game);
 
-// if(put == 'left') snakeX -= box;
-// if(put == 'right') snakeX += box;
-// if(put == 'up') snakeY -= box;
-// if(put == 'down') snakeY += box;
 
-// snake.unshift()
+
+    if(put == 'left') snakeX -= box;
+    if(put == 'right') snakeX += box;
+    if(put == 'up') snakeY -= box;
+    if(put == 'down') snakeY += box;
+
+     //Ест food
+    if(snakeX == food.x && snakeY == food.y){
+        score++;
+        food = {
+			x: Math.floor((Math.random() * 17 + 1)) * box,
+			y: Math.floor((Math.random() * 15 + 3)) * box,
+		};
+    }else {
+        snake.pop();
+    }
+   
+
+        let head = {
+            x:snakeX,
+            y:snakeY
+        }
+
+        eatTail(head, snake);
+
+        snake.unshift(head);
+
+    }
 
 
 document.addEventListener('keydown' , walks);
