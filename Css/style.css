@@ -7,7 +7,7 @@ canvas{
 
 html { overflow:  hidden; }
 #fullgame{
-    margin: 36%;
+    margin: 30%;
     width: 500px;
     height: 300px;
     background-color: red;
@@ -19,10 +19,21 @@ html { overflow:  hidden; }
     text-align: center;
     color: gold;
     font-size: 26px;
+    margin: 30px;
 }
 
 #twogame{
         text-align: center;
         color: gold;
         font-size: 26px;
+}
+
+#firsttext{
+    text-align: center;
+    margin: 0 auto;
+}
+
+#twotext{
+    text-align: center;
+    margin: 100px;
 }
