@@ -7,8 +7,8 @@ canvas{
 
 html { overflow:  hidden; }
 #fullgame{
-    margin: 10% 20% 10% 20%;
-    width: 500px;
+    margin: 10% auto;
+    width: 70%;
     height: 300px;
     background-color: red;
     display: flex;
