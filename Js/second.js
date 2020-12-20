@@ -12,6 +12,17 @@ let firstscore = 0 ;
 let secondscore = 0;
 
 let box = 32;
+//Хвост end
+function endsnake(tag ,arr){
+    for(let i =0 ; i<arr.length ; i++){
+        if (tag.x == arr[i].x  && tag.y == arr[i].y){
+            clearInterval(game);
+        }
+    }
+}
+//Края Змей
+
+
 
 let food ={
     x:Math.round(Math.random()*16+ 1)*box,
@@ -54,6 +65,10 @@ function draw(){
     let firstsnakeX = firstsnake[0].x;
     let firstsnakeY = firstsnake[0].y;
 
+    if(firstsnakeX < box || firstsnakeX > box * 17
+        || firstsnakeY < 3 * box || firstsnakeY > box * 17)
+        clearInterval(game);
+
     if(step == 'down') firstsnakeY += box;
     if(step == 'up') firstsnakeY -= box;
     if(step == 'left') firstsnakeX -= box;
@@ -75,14 +90,8 @@ function draw(){
         y : firstsnakeY
     }
 
-    // ударение Об хвост function 
-    function endsnake(tag ,arr){
-        for(let i =0 ; i<arr.length ; i++){
-            if (tag.x == arr[i].x  && tag.y == arr[i].y){
-                clearInterval(game);
-            }
-        }
-    }
+
+    
 
 endsnake(firsthead ,firstsnake);
     firstsnake.unshift(firsthead);
@@ -92,6 +101,9 @@ endsnake(firsthead ,firstsnake);
    let  secondsnakeX = secondsnake[0].x ;
    let  secondsnakeY = secondsnake[0].y ;
 
+   if(secondsnakeX < box || secondsnakeX > box * 17
+    || secondsnakeY < 3 * box || secondsnakeY > box * 17)
+    clearInterval(game);
 
    if(put == 'down') secondsnakeY += box;
    if(put == 'up') secondsnakeY -= box;
@@ -115,6 +127,20 @@ endsnake(firsthead ,firstsnake);
    }
    endsnake(secondhead ,secondsnake);
    secondsnake.unshift(secondhead);
+
+
+   function kill(arr , arr2){
+    for(let i =0 ; i<arr.length ; i++){
+        for(let j =0  ; j<arr2.length ; i++){
+            if(arr2[j].x == arr[i] && arr2[j].y == arr[i].y ){
+                clearInterval(game);
+            }
+        }
+    }
+
+}
+
+kill(firstsnake, secondsnake);
 
 }
 
@@ -146,6 +172,7 @@ function walk2(event){
         put = 'down'
     }
     }
+
 
 console.log(walk);
 document.addEventListener('keydown' ,walk);
