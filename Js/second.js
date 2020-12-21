@@ -13,16 +13,24 @@ let secondscore = 0;
 
 let box = 32;
 //Хвост end
-function endsnake(tag ,arr){
-    for(let i =0 ; i<arr.length ; i++){
-        if (tag.x == arr[i].x  && tag.y == arr[i].y){
-            clearInterval(game);
-        }
-    }
-}
+
+
 //Края Змей
 
 
+   function kill(arr , arr2){
+    for(let i =0 ; i<arr.length ; i++){
+        kik = arr[i].x;
+        kok = arr[i].y;
+        console.log(kok)
+        for(let j =0  ; j<arr2.length ; j++){
+            if(arr2[j].x == kik && arr2[j].y == kok ){
+                clearInterval(game);
+            }
+        }
+    }
+
+}
 
 let food ={
     x:Math.round(Math.random()*16+ 1)*box,
@@ -69,6 +77,8 @@ function draw(){
         || firstsnakeY < 3 * box || firstsnakeY > box * 17)
         clearInterval(game);
 
+        
+
     if(step == 'down') firstsnakeY += box;
     if(step == 'up') firstsnakeY -= box;
     if(step == 'left') firstsnakeX -= box;
@@ -90,10 +100,6 @@ function draw(){
         y : firstsnakeY
     }
 
-
-    
-
-endsnake(firsthead ,firstsnake);
     firstsnake.unshift(firsthead);
 
 //Second Snake  !!!
@@ -125,23 +131,10 @@ endsnake(firsthead ,firstsnake);
        x : secondsnakeX,
        y : secondsnakeY 
    }
-   endsnake(secondhead ,secondsnake);
    secondsnake.unshift(secondhead);
 
 
-   function kill(arr , arr2){
-    for(let i =0 ; i<arr.length ; i++){
-        for(let j =0  ; j<arr2.length ; i++){
-            if(arr2[j].x == arr[i] && arr2[j].y == arr[i].y ){
-                clearInterval(game);
-            }
-        }
-    }
-
-}
-
-kill(firstsnake, secondsnake);
-
+   kill(firstsnake,secondsnake)
 }
 
 let step ;
